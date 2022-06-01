@@ -10,5 +10,30 @@ CREATE TABLE studentTable(
     PRIMARY KEY(studentID)
 );
 
-INSERT INTO studentTable (studentName) VALUES('Nathanael Setiawan');
-INSERT INTO studentTable (studentName) VALUES('Jayson Michael');
+DROP TABLE IF EXISTS teacherTable;
+CREATE TABLE teacherTable(
+	teacherID int NOT NULL AUTO_INCREMENT,
+    teacherName varchar(255),
+    PRIMARY KEY(teacherID)
+);
+
+DROP TABLE IF EXISTS lessonsTable;
+CREATE TABLE lessonsTable(
+	lessonID int NOT NULL AUTO_INCREMENT,
+    lessonName varchar(255),
+    lessonTeacherID int,
+    PRIMARY KEY(lessonID),
+    FOREIGN KEY(lessonTeacherID) REFERENCES teacherTable(teacherID)
+);
+
+DROP TABLE IF EXISTS attendanceTable;
+CREATE TABLE attendanceTable(
+	attendanceID int NOT NULL AUTO_INCREMENT,
+    attendanceDate datetime,
+    lessonID int,
+    studentID int,
+    attendance bool,
+    PRIMARY KEY(attendanceID),
+    FOREIGN KEY(lessonID) REFERENCES lessonsTable(lessonID),
+    FOREIGN KEY(studentID) REFERENCES studentTable(studentID)
+)
