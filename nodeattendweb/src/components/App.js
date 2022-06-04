@@ -11,7 +11,7 @@ import Account from './Account'
 
 function App() {
   return (
-      <>
+      <div>
         <BrowserRouter>
           <AuthProvider>
             <Switch>
@@ -24,7 +24,7 @@ function App() {
             </Switch>
           </AuthProvider>
         </BrowserRouter>
-      </>
+      </div>
   )
 }
 

@@ -21,9 +21,9 @@ DROP TABLE IF EXISTS lessonsTable;
 CREATE TABLE lessonsTable(
 	lessonID int NOT NULL AUTO_INCREMENT,
     lessonName varchar(255),
-    lessonTeacherID int,
+    teacherID int,
     PRIMARY KEY(lessonID),
-    FOREIGN KEY(lessonTeacherID) REFERENCES teacherTable(teacherID)
+    FOREIGN KEY(teacherID) REFERENCES teacherTable(teacherID)
 );
 
 DROP TABLE IF EXISTS attendanceTable;

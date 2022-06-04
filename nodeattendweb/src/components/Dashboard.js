@@ -48,7 +48,34 @@ export default function Dashboard() {
 
 
       <div className="content">
-        This is a content
+        <h1>Welcome to 3MS Face Recognition System</h1>
+
+        <h2>Student Registry</h2>
+        <form>
+          <label for='studentName'>Write Student Name</label><br></br>
+          <input type="text" id="studentName" name="studentName"></input><br></br>
+          <label for='studentPicture'>Upload Student Picture</label><br></br>
+          <input type="file" id="studentPicture" name="studentPicture" accept="image/*"></input><br></br><br></br>
+          <input type="submit" name="Submit"></input>
+        </form>
+
+        <h2>Teacher Registry</h2>
+        <form>
+          <label for='teacherName'>Write Teacher Name</label><br></br>
+          <input type="text" id="teacherName" name="teacherName"></input><br></br><br></br>
+          <input type="submit" name="Submit"></input>
+        </form>
+
+        <h2>Lesson Registry</h2>
+        <form>
+          <label for='lessonName'>Write Lesson Name</label><br></br>
+          <input type="text" id="lessonName" name="lessonName"></input><br></br>
+          <label for='teacherID'>Write Teacher Name</label><br></br>
+          <input type="text" id="teacherID" name="teacherID"></input><br></br><br></br>
+          <input type="submit" name="Submit"></input>
+        </form>
+
+        <h2>Attendance Registry</h2>
       </div>
    </div>
   )
