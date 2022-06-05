@@ -67,37 +67,11 @@ export default function Dashboard() {
       <Container className="insertregistry">
         <Card className="registrybody">
           <Card.Body>
-          <h1 className="registrytitle">Welcome to <br/>
-           3MS Face Recognition System</h1><br/>
-          <div className="studentregistry">
-            <h2>Student Registry</h2>
-            <Form onSubmit={handleSubmit}>
-              <Form.Label for='studentName'>Write Student Name</Form.Label><br/>
-              <input type="text" id="studentName" name="studentName" onChange={handleChange}></input><br/><br/>
-              <Form.Label for='studentName'>Write Student Class</Form.Label><br/>
-              <input type="text" id="studentClass" name="studentClass" onChange={handleChange}></input><br/><br/>
-              <Form.Label for='studentPicture'>Upload Student Picture</Form.Label><br></br>
-              <input type="file" id="studentPicture" name="studentPicture" accept="image/*" onChange={handleChange}></input><br/><br/>
-              <Button className="w-100" type="submit"> Submit </Button>
-            </Form>
-          </div>
-          {/* <h2>Teacher Registry</h2>
-          <Form>
-            <Form.Label for='teacherName'>Write Teacher Name<Form.Labelabel><br></br>
-            <input type="text" id="teacherName" name="teacherName"></input><br></br><br></br>
-            <Button className="w-100" type="submit"> Submit </Button>
-          </Form>
-
-          <h2>Lesson Registry</h2>
-          <Form>
-            <Form.Label for='lessonName'>Write Lesson Name<Form.Labelabel><br></br>
-            <input type="text" id="lessonName" name="lessonName"></input><br></br>
-            <Form.Label for='teacherID'>Write Teacher Name<Form.Labelabel><br></br>
-            <input type="text" id="teacherID" name="teacherID"></input><br></br><br></br>
-            <Button className="w-100" type="submit"> Submit </Button>
-          </Form>
-
-          <h2>Attendance Registry</h2> */}
+          <h1 className="registrytitle">Class 1 - WAOUNDS</h1><br/>
+          <p>insert node flux button here (delete later)</p>
+          <div>
+          <p>insert database table here and the manual buttons</p>
+          </div>  
           </Card.Body>
         </Card>
       </Container>

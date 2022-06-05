@@ -36,13 +36,10 @@ export default function Dashboard() {
         <Navbar.Toggle />
         <Navbar.Collapse className="right-align">
         <Nav>
-          <NavDropdown title="Classes">
-            <NavDropdown.Item href="Classes/Class1">Class 1</NavDropdown.Item>
-            <NavDropdown.Item href="Classes/Class2">Class 2</NavDropdown.Item>
-            <NavDropdown.Item href="Classes/Class3">Class 3</NavDropdown.Item>
-          </NavDropdown>
+          <Nav.Link href="/">Registry</Nav.Link>
+          <Nav.Link href="StudClass">Classes</Nav.Link>
           <Nav.Link href="Account">Account</Nav.Link>
-          <Button variant="link" onClick={handleLogout}>
+          <Button className="logoutbutton" variant="link" onClick={handleLogout}>
           Log Out
         </Button>
         </Nav>

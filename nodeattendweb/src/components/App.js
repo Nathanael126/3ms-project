@@ -8,6 +8,8 @@ import PrivRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 import Account from './Account'
+import StudClass from './StudClass'
+import StudDatabase from './StudDatabase'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
               <PrivRoute exact path="/" component={Dashboard} />
               <PrivRoute path="/update-profile" component={UpdateProfile} />
               <PrivRoute path="/Account" component={Account} />
+              <PrivRoute path="/StudClass" component={StudClass} />
+              <PrivRoute path="/StudDatabase" component={StudDatabase} />
               <Route path="/signup" component={Register} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
