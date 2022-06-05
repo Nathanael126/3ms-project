@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Button, Alert, Navbar, Form } from "react-bootstrap";
 import { useAuth } from "../backends/AuthCont";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import './styling.css';
 import { Nav } from "react-bootstrap";
 import { Container } from "react-bootstrap";
@@ -13,6 +13,8 @@ export default function Dashboard() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
+  const [inputs, setInputs] = useState([]);
+  const {id} = useParams();
 
   async function handleLogout() {
     setError("")
@@ -31,6 +33,7 @@ export default function Dashboard() {
         getStudents();
     }, []);
   
+  
   function getStudents(){
     axios.get('http://localhost/PHP-Stuff-3ms/user').then(function(response){
       console.log(response.data);
@@ -41,6 +44,22 @@ export default function Dashboard() {
       console.log(response.data);
       getStudents();
     });
+  }
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}));
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios.put(`http://localhost/PHP-Stuff-3ms/user/${id}/edit`, inputs).then(function(response){
+        console.log(response.data);
+        history.push('/');
+    });
+    
   }
 
     
@@ -69,46 +88,21 @@ export default function Dashboard() {
 
 
       <div className="content">
-      <Container className="databasestyling">
-        <Card className="databasebody">
+      <Container className="insertregistry">
+        <Card className="registrybody">
           <Card.Body>
-          <h1 className="registrytitle">Class 1 - WAOSUND</h1><br/>
-          <table className="studentdatabase">
-                <thead>
-                    <tr>
-                      <td colspan="8"  style={{textAlign:'center'}}>
-                        <Link to={'user/${user.id}/edit'}>Check Attendance</Link>
-                      </td>
-                    </tr>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Student Name</th>
-                        <th>Student Photo</th>
-                        <th>Session 1</th>
-                        <th>Session 2</th>
-                        <th>Session 3</th>
-                        <th>Session 4</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, key) =>
-                        <tr key={key}>
-                            <td>{user.studentID}</td>
-                            <td>{user.studentName}</td>
-                            <td>{user.studentPicture}</td>
-                            <td>{user.studentSession1}</td>
-                            <td>{user.studentSession1}</td>
-                            <td>{user.studentSession1}</td>
-                            <td>{user.studentSession1}</td>
-                            <td>
-                                <button onClick={() => deleteStudent(user.id)}>Delete</button>
-                            </td>
-                        </tr>
-                    )}
-                    
-                </tbody>
-            </table>
+          <div>
+          <h1 className="registrytitle">Edit User</h1><br/>
+            <Form onSubmit={handleSubmit}>
+              <Form.Label for='studentName'>Write Student Name</Form.Label><br/>
+              <input type="text" id="studentName" name="studentName" onChange={handleChange}></input><br/><br/>
+              <Form.Label for='studentName'>Write Student Class ID</Form.Label><br/>
+              <input type="text" id="studentClass" name="studentClass" onChange={handleChange}></input><br/><br/>
+              <Form.Label for='studentPicture'>Upload Student Picture</Form.Label><br></br>
+              <input type="file" id="studentPicture" name="studentPicture" accept="image/*" onChange={handleChange}></input><br/><br/>
+              <Button className="w-100" type="submit"> Submit </Button>
+            </Form>
+        </div>
           </Card.Body>
         </Card>
       </Container>

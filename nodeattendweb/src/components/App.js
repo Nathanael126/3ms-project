@@ -10,6 +10,7 @@ import UpdateProfile from "./UpdateProfile"
 import Account from './Account'
 import StudClass from './StudClass'
 import StudDatabase from './StudDatabase'
+import StudEdit from './StudEdit'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <PrivRoute path="/Account" component={Account} />
               <PrivRoute path="/StudClass" component={StudClass} />
               <PrivRoute path="/StudDatabase" component={StudDatabase} />
+              <PrivRoute path="/user/:id/edit" component={StudEdit} />
               <Route path="/signup" component={Register} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />

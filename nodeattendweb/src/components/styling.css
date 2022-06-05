@@ -79,11 +79,30 @@ page {
 .registrybody{
     margin-left: auto;
     margin-right: auto;
-    max-width: 700px;
+    max-width: 500px;
 }
 .registrytitle{
     text-align: center;
 }
-.studentregistry{
 
-}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .databasestyling{
+    padding-top: 7%;
+    justify-content: center;
+    margin: auto;
+    min-height: 100vh;
+  }
+
+  .databasebody{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .studentdatabase{
+      margin: auto;
+  }

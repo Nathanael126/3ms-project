@@ -4,7 +4,7 @@ import { useAuth } from "../backends/AuthCont"
 import { Link, useHistory } from "react-router-dom"
 import './styling.css'
 import { Nav } from "react-bootstrap"
-import { Navbar, NavDropdown } from "react-bootstrap"
+import { Navbar } from "react-bootstrap"
 
 export default function Dashboard() {
   const [error, setError] = useState("")

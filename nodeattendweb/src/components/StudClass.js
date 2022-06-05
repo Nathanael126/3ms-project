@@ -5,7 +5,6 @@ import { useAuth } from "../backends/AuthCont";
 import { Link, useHistory } from "react-router-dom";
 import './styling.css';
 import { Nav } from "react-bootstrap";
-import { NavDropdown } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 
 export default function Dashboard() {
@@ -54,14 +53,28 @@ export default function Dashboard() {
         <Card className="registrybody">
           <Card.Body>
           <h1 className="registrytitle">Select Student Class</h1><br/>
-          <div>
-            <h2>Class 1 - get name from sql - this one works</h2> 
-            <Button href='StudDatabase'>Open Database</Button>
-            <br/><br/><h2>Class 2 - get name from sql</h2> 
-            <Button href='/'>Open Database</Button>
-            <br/><br/><h2>Class 3 - get name from sql</h2> 
-            <Button href='/'>Open Database</Button>
-          </div>  
+          <table className="studentdatabase">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Attendance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>Class 1 - WDOASNDO</td>
+                        <td>
+                        <Link to={'/studDatabase'} style={{marginRight: "10px"}}>Edit</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Class 2 - NONOMNKOP</td>
+                        <td>
+                        <Link to={'/studDatabase'} style={{marginRight: "10px"}}>Edit</Link>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
           </Card.Body>
         </Card>
       </Container>

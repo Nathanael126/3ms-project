@@ -14,5 +14,6 @@
 				echo "Database Error: " . $e->getMessage();
 			}
 		}
+		
 	}
  ?>

@@ -5,7 +5,6 @@ import { useAuth } from "../backends/AuthCont";
 import { Link, useHistory } from "react-router-dom";
 import './styling.css';
 import { Nav } from "react-bootstrap";
-import { NavDropdown } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 
 export default function Dashboard() {
@@ -75,7 +74,7 @@ export default function Dashboard() {
             <Form onSubmit={handleSubmit}>
               <Form.Label for='studentName'>Write Student Name</Form.Label><br/>
               <input type="text" id="studentName" name="studentName" onChange={handleChange}></input><br/><br/>
-              <Form.Label for='studentName'>Write Student Class</Form.Label><br/>
+              <Form.Label for='studentName'>Write Student Class ID</Form.Label><br/>
               <input type="text" id="studentClass" name="studentClass" onChange={handleChange}></input><br/><br/>
               <Form.Label for='studentPicture'>Upload Student Picture</Form.Label><br></br>
               <input type="file" id="studentPicture" name="studentPicture" accept="image/*" onChange={handleChange}></input><br/><br/>
