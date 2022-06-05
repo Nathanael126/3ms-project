@@ -1,0 +1,3 @@
+Put all the files in here into your htdocs folder cus its using apache
+
+like C:\xampp\htdocs

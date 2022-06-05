@@ -37,7 +37,7 @@ export default function Dashboard() {
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    // axios.post
+    axios.post('http://localhost/PHP-Stuff-3ms/user/save',inputs);
     console.log(inputs);
   }
   return (
@@ -81,23 +81,6 @@ export default function Dashboard() {
               <Button className="w-100" type="submit"> Submit </Button>
             </Form>
           </div>
-          {/* <h2>Teacher Registry</h2>
-          <Form>
-            <Form.Label for='teacherName'>Write Teacher Name<Form.Labelabel><br></br>
-            <input type="text" id="teacherName" name="teacherName"></input><br></br><br></br>
-            <Button className="w-100" type="submit"> Submit </Button>
-          </Form>
-
-          <h2>Lesson Registry</h2>
-          <Form>
-            <Form.Label for='lessonName'>Write Lesson Name<Form.Labelabel><br></br>
-            <input type="text" id="lessonName" name="lessonName"></input><br></br>
-            <Form.Label for='teacherID'>Write Teacher Name<Form.Labelabel><br></br>
-            <input type="text" id="teacherID" name="teacherID"></input><br></br><br></br>
-            <Button className="w-100" type="submit"> Submit </Button>
-          </Form>
-
-          <h2>Attendance Registry</h2> */}
           </Card.Body>
         </Card>
       </Container>
