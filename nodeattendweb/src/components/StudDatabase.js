@@ -26,19 +26,10 @@ export default function Dashboard() {
     }
   }
 
-  // PHP Input handling
-  const [inputs,setInputs] = useState({})
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs(values => ({...values, [name]:value}));
-  }
-
-  const handleSubmit = (event) =>{
-    event.preventDefault();
-    // axios.post
-    console.log(inputs);
+  function getStudents(){
+    axios.get('http://localhost/PHP-Stuff-3ms/user').then(function(response){
+      console.log(response.data);
+    });
   }
   return (
 
@@ -67,11 +58,7 @@ export default function Dashboard() {
       <Container className="insertregistry">
         <Card className="registrybody">
           <Card.Body>
-          <h1 className="registrytitle">Class 1 - WAOUNDS</h1><br/>
-          <p>insert node flux button here (delete later)</p>
-          <div>
-          <p>insert database table here and the manual buttons</p>
-          </div>  
+          <h1 className="registrytitle">Students</h1><br/>
           </Card.Body>
         </Card>
       </Container>

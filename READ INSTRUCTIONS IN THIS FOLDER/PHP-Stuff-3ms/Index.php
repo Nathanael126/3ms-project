@@ -7,9 +7,12 @@
 
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method){
+        case "GET":
+            
+
         case "POST":
             $user = json_decode(file_get_contents('php://input'));
-            $sql = "INSERT INTO studenttable users(studentID, studentName, studentClass, studentPicture) VALUES(null, :studentName, :studentClass, studentPicture)";
+            $sql = "INSERT INTO studenttable (studentName, studentClass, studentPicture) VALUES(:studentName, :studentClass, :studentPicture)";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':studentName', $user->studentName);
             $stmt->bindParam(':studentClass', $user->studentClass);
