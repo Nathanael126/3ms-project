@@ -1,27 +1,44 @@
-import React, { useState } from "react"
-import { Card, Button, Alert, Navbar } from "react-bootstrap"
-import { useAuth } from "../backends/AuthCont"
-import { Link, useHistory } from "react-router-dom"
-import './styling.css'
-import { Nav } from "react-bootstrap"
-import { NavDropdown } from "react-bootstrap"
+import React, { useState } from "react";
+import axios from "axios";
+import { Card, Button, Alert, Navbar } from "react-bootstrap";
+import { useAuth } from "../backends/AuthCont";
+import { Link, useHistory } from "react-router-dom";
+import './styling.css';
+import { Nav } from "react-bootstrap";
+import { NavDropdown } from "react-bootstrap";
 
 export default function Dashboard() {
-  const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
-  const history = useHistory()
+
+  // Login functions
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
 
   async function handleLogout() {
     setError("")
 
     try {
-      await logout()
-      history.push("/login")
+      await logout();
+      history.push("/login");
     } catch {
-      setError("Failed to log out")
+      setError("Failed to log out");
     }
   }
 
+  // PHP Input handling
+  const [inputs,setInputs] = useState({})
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]:value}));
+  }
+
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+    // axios.post
+    console.log(inputs);
+  }
   return (
     <div className="page">
       <Navbar bg='basecolor' variant="dark" sticky='top' expand='sm' collapseOnSelect >
@@ -51,15 +68,15 @@ export default function Dashboard() {
         <h1>Welcome to 3MS Face Recognition System</h1>
 
         <h2>Student Registry</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label for='studentName'>Write Student Name</label><br></br>
-          <input type="text" id="studentName" name="studentName"></input><br></br>
+          <input type="text" id="studentName" name="studentName" onChange={handleChange}></input><br></br>
           <label for='studentPicture'>Upload Student Picture</label><br></br>
-          <input type="file" id="studentPicture" name="studentPicture" accept="image/*"></input><br></br><br></br>
+          <input type="file" id="studentPicture" name="studentPicture" accept="image/*" onChange={handleChange}></input><br></br><br></br>
           <input type="submit" name="Submit"></input>
         </form>
 
-        <h2>Teacher Registry</h2>
+        {/* <h2>Teacher Registry</h2>
         <form>
           <label for='teacherName'>Write Teacher Name</label><br></br>
           <input type="text" id="teacherName" name="teacherName"></input><br></br><br></br>
@@ -75,7 +92,7 @@ export default function Dashboard() {
           <input type="submit" name="Submit"></input>
         </form>
 
-        <h2>Attendance Registry</h2>
+        <h2>Attendance Registry</h2> */}
       </div>
    </div>
   )

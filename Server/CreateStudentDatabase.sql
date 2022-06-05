@@ -5,8 +5,8 @@ USE studentDatabase;
 DROP TABLE IF EXISTS studentTable;
 CREATE TABLE studentTable(
 	studentID int NOT NULL AUTO_INCREMENT,
-    studentName varchar(255),
-    studentPicture longblob,
+    studentName varchar(255) NOT NULL,
+    studentPicture longblob NOT NULL,
     PRIMARY KEY(studentID)
 );
 

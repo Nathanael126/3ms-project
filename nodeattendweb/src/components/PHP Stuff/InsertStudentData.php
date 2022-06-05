@@ -1,3 +1,7 @@
+<?php
+    include_once './dhb.inc.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,7 +9,6 @@
     </head>
     <body>
         <?php
-            echo("Hello World!");
         ?>
     </body>
 </html>
