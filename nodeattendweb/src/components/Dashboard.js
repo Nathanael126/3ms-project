@@ -37,8 +37,9 @@ export default function Dashboard() {
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    axios.post('http://localhost/PHP-Stuff-3ms/user/save',inputs);
-    console.log(inputs);
+    axios.post('http://localhost/PHP-Stuff-3ms/user/save',inputs).then(function(response){
+      console.log(response.data);
+    });
   }
   return (
 
