@@ -10,7 +10,8 @@ import UpdateProfile from "./UpdateProfile"
 import Account from './Account'
 import StudClass from './StudClass'
 import StudDatabase from './StudDatabase'
-import StudEdit from './StudEdit'
+import StudAttend from './StudAttend'
+import StudEdit from'./StudEdit'
 
 function App() {
   return (
@@ -18,12 +19,13 @@ function App() {
         <BrowserRouter>
           <AuthProvider>
             <Switch>
-              <PrivRoute exact path="/" component={Dashboard} />
+              <PrivRoute index exact path="/" component={Dashboard} />
               <PrivRoute path="/update-profile" component={UpdateProfile} />
               <PrivRoute path="/Account" component={Account} />
               <PrivRoute path="/StudClass" component={StudClass} />
-              <PrivRoute path="/StudDatabase" component={StudDatabase} />
-              <PrivRoute path="/user/:id/edit" component={StudEdit} />
+              <PrivRoute path="/studDatabase/:id" component={StudDatabase} />
+              <PrivRoute path="/studAttend/:id" component={StudAttend} />
+              <PrivRoute path="/studEdit/:id" component={StudEdit} />
               <Route path="/signup" component={Register} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />

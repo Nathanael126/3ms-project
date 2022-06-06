@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Button, Alert, Navbar, Form } from "react-bootstrap";
 import { useAuth } from "../backends/AuthCont";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams} from "react-router-dom";
 import './styling.css';
 import { Nav } from "react-bootstrap";
 import { Container } from "react-bootstrap";
@@ -26,24 +26,49 @@ export default function Dashboard() {
   }
 
   //database functions
-  const [users, setUsers] = useState([]);
-    useEffect(() => {
-        getStudents();
-    }, []);
+  const {id} = useParams();
+  const [inputs, setInputs] = useState([]);
+  const [students, setStudents] = useState([]);
+  useEffect(() => {
+    getStudents();
+  }, []);
   
   function getStudents(){
-    axios.get('http://localhost/PHP-Stuff-3ms/user').then(function(response){
+    axios.get(`http://localhost/PHP-Stuff-3ms/Class/${id}`).then(function(response){
       console.log(response.data);
+      console.log(Array.isArray(response.data))
+      setStudents(response.data);
     });
   }
-  function deleteStudent(userID){
-    axios.delete('http://localhost/PHP-Stuff-3ms/user').then(function(response){
+  const deleteStudent = (id) =>{
+    axios.delete(`http://localhost/PHP-Stuff-3ms/${id}/delete`).then(function(response){
       console.log(response.data);
       getStudents();
     });
   }
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}));
+  }
 
-    
+  const handleRef = (event) => {
+    event.preventDefault();
+    history.push(`/studAttend/${id}`);
+  }
+  const handleAttends = (event) => {
+    event.preventDefault();
+
+  axios.put(`http://localhost/PHP-Stuff-3ms/${id}/attend/0`, inputs).then(function(response){
+      console.log(response.data);
+  });
+  }
+
+  const [studID, setStudID] = useState([]);
+  const handleEdit = (e) =>{
+    e.preventDefault();
+    history.push(`/studEdit/${studID}`);
+  }
   
   return (
 
@@ -51,15 +76,15 @@ export default function Dashboard() {
       <Navbar bg='basecolor' variant="dark" sticky='top' expand='sm' collapseOnSelect >
         <Navbar.Brand>
         <img src={require('../images/3msFaceRecog.png')} alt="logo"/>
-          3msFaceRecog
+          3msStudentReg
         </Navbar.Brand>
 
         <Navbar.Toggle />
         <Navbar.Collapse className="right-align">
         <Nav>
           <Nav.Link href="/">Registry</Nav.Link>
-          <Nav.Link href="StudClass">Classes</Nav.Link>
-          <Nav.Link href="Account">Account</Nav.Link>
+          <Nav.Link href="/StudClass">Classes</Nav.Link>
+          <Nav.Link href="/Account">Account</Nav.Link>
           <Button variant="link" onClick={handleLogout}>
           Log Out
         </Button>
@@ -72,43 +97,40 @@ export default function Dashboard() {
       <Container className="databasestyling">
         <Card className="databasebody">
           <Card.Body>
-          <h1 className="registrytitle">Class 1 - WAOSUND</h1><br/>
+          <h1 className="registrytitle">Students</h1><br/>
           <table className="studentdatabase">
                 <thead>
                     <tr>
-                      <td colspan="8"  style={{textAlign:'center'}}>
-                        <Link to={'user/${user.id}/edit'}>Check Attendance</Link>
-                      </td>
-                    </tr>
-                    <tr>
                         <th>Student ID</th>
                         <th>Student Name</th>
+                        <th>Student Class</th>
                         <th>Student Photo</th>
-                        <th>Session 1</th>
-                        <th>Session 2</th>
-                        <th>Session 3</th>
-                        <th>Session 4</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, key) =>
+                    {students.map((user, key) =>
                         <tr key={key}>
                             <td>{user.studentID}</td>
                             <td>{user.studentName}</td>
+                            <td>{user.studentClass}</td>
                             <td>{user.studentPicture}</td>
-                            <td>{user.studentSession1}</td>
-                            <td>{user.studentSession1}</td>
-                            <td>{user.studentSession1}</td>
-                            <td>{user.studentSession1}</td>
                             <td>
-                                <button onClick={() => deleteStudent(user.id)}>Delete</button>
+                              <button onClick={() => deleteStudent(user.id)}>Delete</button>
                             </td>
                         </tr>
                     )}
                     
                 </tbody>
             </table>
+            <br/><br/>
+            <div className="registrytitle">
+              <h1>Input Student ID to Edit</h1><br/>
+              <Form onSubmit={handleEdit}>
+                <input type="text" id="classSelect" name="classSelect" onChange={(e)=>setStudID(e.target.value)}></input><br/><br/>
+                <Button className="w-100" type="submit"> Edit </Button>
+              </Form>
+            </div>
           </Card.Body>
         </Card>
       </Container>

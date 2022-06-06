@@ -8,8 +8,12 @@ CREATE TABLE studentTable(
     studentName varchar(255) NOT NULL,
     studentClass varchar(255) NOT NULL,
     studentPicture varchar(255) NOT NULL,
+    studentSession1 varchar(255) NOT NULL,
+    studentSession2 varchar(255) NOT NULL,
+    studentSession3 varchar(255) NOT NULL,
     PRIMARY KEY(studentID)
 );
+
 
 -- DROP TABLE IF EXISTS teacherTable;
 -- CREATE TABLE teacherTable(

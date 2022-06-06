@@ -29,15 +29,15 @@ export default function Dashboard() {
   const [inputs,setInputs] = useState({})
 
   const handleChange = (event) => {
-    const name = event.target.name;
+    const studentName = event.target.name;
     const value = event.target.value;
-    setInputs(values => ({...values, [name]:value}));
+    setInputs(values => ({...values, [studentName]:value}));
   }
 
   const handleSubmit = (event) =>{
     event.preventDefault();
     axios.post('http://localhost/PHP-Stuff-3ms/user/save',inputs).then(function(response){
-      console.log(response.data);
+      console.log(response);
     });
   }
   return (
@@ -46,15 +46,15 @@ export default function Dashboard() {
       <Navbar bg='basecolor' variant="dark" sticky='top' expand='sm' collapseOnSelect >
         <Navbar.Brand>
         <img src={require('../images/3msFaceRecog.png')} alt="logo"/>
-          3msFaceRecog
+          3msStudentReg
         </Navbar.Brand>
 
         <Navbar.Toggle />
         <Navbar.Collapse className="right-align">
         <Nav>
           <Nav.Link href="/">Registry</Nav.Link>
-          <Nav.Link href="StudClass">Classes</Nav.Link>
-          <Nav.Link href="Account">Account</Nav.Link>
+          <Nav.Link href="/StudClass">Classes</Nav.Link>
+          <Nav.Link href="/Account">Account</Nav.Link>
           <Button variant="link" onClick={handleLogout}>
           Log Out
         </Button>

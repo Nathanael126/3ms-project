@@ -28,28 +28,31 @@ export default function Dashboard() {
   //database functions
   const {id} = useParams();
   const [inputs, setInputs] = useState([]);
+  const [students, setStudents] = useState([]);
   useEffect(() => {
     getStudents();
   }, []);
   
   function getStudents(){
-    axios.get(`http://localhost/PHP-Stuff-3ms/user/${id}`).then(function(response){
+    axios.get(`http://localhost/PHP-Stuff-3ms/Class/${id}`).then(function(response){
       console.log(response.data);
       setInputs(response.data);
+      setStudents(response.data);
     });
   }
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}));
-}
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    axios.put(`http://localhost/PHP-Stuff-3ms/user/${id}/edit`, inputs).then(function(response){
-        console.log(response.data);
-        history.push('/StudClass');
-    }); 
+    axios.put(`http://localhost/PHP-Stuff-3ms/${students.studentID}/edit`, inputs).then(function(response){
+      console.log(response.data);
+      history.push('/');
+  });
   }
   
   return (
@@ -58,7 +61,7 @@ export default function Dashboard() {
       <Navbar bg='basecolor' variant="dark" sticky='top' expand='sm' collapseOnSelect >
         <Navbar.Brand>
         <img src={require('../images/3msFaceRecog.png')} alt="logo"/>
-          3msStudentReg
+          3msFaceRecog
         </Navbar.Brand>
 
         <Navbar.Toggle />
@@ -79,14 +82,44 @@ export default function Dashboard() {
       <Container className="databasestyling">
         <Card className="databasebody">
           <Card.Body>
-          <h1>Edit user</h1>
-          <Form onSubmit={handleSubmit}>
-              <Form.Label for='studentName'>Edit Student Name</Form.Label><br/>
-              <input value={inputs.studentName} type="text" id="studentName" name="studentName" onChange={handleChange}></input><br/><br/>
-              <Form.Label for='studentName'>Edit Student Class ID</Form.Label><br/>
-              <input value={inputs.studentClass}type="text" id="studentClass" name="studentClass" onChange={handleChange}></input><br/><br/>
-              <Button className="w-100" type="submit"> Submit </Button>
-            </Form>
+          <h1 className="registrytitle">Class 1 - WAOSUND</h1><br/>
+          <form onSubmit={handleSubmit}>
+          <table className="studentdatabase">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Student Class</th>
+                        <th>Student Photo</th>
+                        <th>Session 1</th>
+                        <th>Session 2</th>
+                        <th>Session 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {students.map((user, key) =>
+                        <tr key={key}>
+                            <td>{user.studentID}</td>
+                            <td>{user.studentName}</td>
+                            <td>{user.studentClass}</td>
+                            <td>{user.studentPicture}</td>
+                            <td>
+                              <input value={inputs.session1} type="text" name="mobile" onChange={handleChange} />
+                            </td>
+                            <td>
+                              <input value={inputs.session2} type="text" name="mobile" onChange={handleChange} />
+                            </td>
+                            <td>
+                              <input value={inputs.session3} type="text" name="mobile" onChange={handleChange} />
+                            </td>
+                        </tr>
+                    )}
+                    <td colSpan="8" align ="right">
+                                <button>Save</button>
+                    </td>
+                </tbody>
+            </table>
+            </form>
           </Card.Body>
         </Card>
       </Container>
