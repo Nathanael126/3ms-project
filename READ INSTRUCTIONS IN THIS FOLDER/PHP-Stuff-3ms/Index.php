@@ -1,6 +1,10 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
+    header("Access-Control-Allow-Methods: *");
+
     include 'connectDB.php';
     $objDB = new connectDB;
     $conn = $objDB->connect();
@@ -10,17 +14,25 @@
         case "GET":
             $sql = "SELECT * FROM studenttable";
             $path = explode('/', $_SERVER['REQUEST_URI']);
-            if(isset($path[3]) && is_numeric($path[3])) {
+            if(isset($path[3]) && $path[2]=='user') {
                 $sql .= " WHERE studentID = :studentID";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':studentID', $path[3]);
                 $stmt->execute();
                 $users = $stmt->fetch(PDO::FETCH_ASSOC);
-            } else {
+            } else if(isset($path[3]) && $path[2]=='Class'){
+                $sql .= " WHERE studentClass = :studentClass";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':studentClass', $path[3]);
+                $stmt->execute();
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }else {
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
                 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
+            echo json_encode($users);
+            break;
 
         case "POST":
             $user = json_decode(file_get_contents('php://input'));
@@ -35,16 +47,16 @@
             else{
                 $response = ['status' => 0, 'message' => 'Recording failed'];
             }
+            echo json_encode($response);
             break;
         
         case "PUT":
             $user = json_decode( file_get_contents('php://input') );
-            $sql = "UPDATE studenttable SET studentName= :studentName, studentClass= :studentClass, studentPicture= :studentPicture,  WHERE studentID = :studentID";
+            $sql = "UPDATE studenttable SET studentName= :studentName, studentClass= :studentClass  WHERE studentID = :studentID";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':studentID', $user->studentID);
             $stmt->bindParam(':studentName', $user->studentName);
             $stmt->bindParam(':studentClass', $user->studentClass);
-            $stmt->bindParam(':studentPicture', $user->studentPicture);
         
             if($stmt->execute()) {
                 $response = ['status' => 1, 'message' => 'Record updated successfully.'];
