@@ -35,7 +35,7 @@ export default function Dashboard() {
   }, []);
 
   function getStudents(){
-    axios.get('http://localhost/PHP-Stuff-3ms/user').then(function(response){
+    axios.get('https://webdev-deployed.herokuapp.com/user').then(function(response){
       console.log(response.data);
     });
   }

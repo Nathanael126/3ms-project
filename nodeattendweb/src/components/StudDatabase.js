@@ -34,14 +34,14 @@ export default function Dashboard() {
   }, []);
   
   function getStudents(){
-    axios.get(`http://localhost/PHP-Stuff-3ms/Class/${id}`).then(function(response){
+    axios.get(`https://webdev-deployed.herokuapp.com/Class/${id}`).then(function(response){
       console.log(response.data);
       console.log(Array.isArray(response.data))
       setStudents(response.data);
     });
   }
   const deleteStudent = (id) =>{
-    axios.delete(`http://localhost/PHP-Stuff-3ms/${id}/delete`).then(function(response){
+    axios.delete(`https://webdev-deployed.herokuapp.com/${id}/delete`).then(function(response){
       console.log(response.data);
       getStudents();
     });
@@ -59,7 +59,7 @@ export default function Dashboard() {
   const handleAttends = (event) => {
     event.preventDefault();
 
-  axios.put(`http://localhost/PHP-Stuff-3ms/${id}/attend/0`, inputs).then(function(response){
+  axios.put(`https://webdev-deployed.herokuapp.com/${id}/attend/0`, inputs).then(function(response){
       console.log(response.data);
   });
   }

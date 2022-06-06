@@ -36,7 +36,7 @@ export default function Dashboard() {
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    axios.post('http://localhost/PHP-Stuff-3ms/user/save',inputs).then(function(response){
+    axios.post('https://webdev-deployed.herokuapp.com/user/save',inputs).then(function(response){
       console.log(response);
     });
   }

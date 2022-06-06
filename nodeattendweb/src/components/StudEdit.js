@@ -33,7 +33,7 @@ export default function Dashboard() {
   }, []);
   
   function getStudents(){
-    axios.get(`http://localhost/PHP-Stuff-3ms/user/${id}`).then(function(response){
+    axios.get(`https://webdev-deployed.herokuapp.com/user/${id}`).then(function(response){
       console.log(response.data);
       setInputs(response.data);
     });
@@ -46,7 +46,7 @@ export default function Dashboard() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.put(`http://localhost/PHP-Stuff-3ms/user/${id}/edit`, inputs).then(function(response){
+    axios.put(`https://webdev-deployed.herokuapp.com/${id}/edit`, inputs).then(function(response){
         console.log(response.data);
         history.push('/StudClass');
     }); 
